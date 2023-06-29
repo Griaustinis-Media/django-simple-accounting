@@ -2,10 +2,10 @@ name: Deploy
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
     types: 
       - ready_for_review
       - review_requested
