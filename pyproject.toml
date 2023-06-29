@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-simple-accounting"
-version = "0.1.0"
+version = "0.1.1"
 description = "Plain and simple accounting module for Django"
 authors = ["Šarūnas Navickas <sarunas@griaustinis.lt>"]
 license = "MIT"
