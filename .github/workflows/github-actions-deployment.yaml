@@ -11,12 +11,27 @@ on:
       - review_requested
 
 jobs:
+  paths-filter:
+    runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.filter.outputs.workflows }}
+    steps:
+    - uses: actions/checkout@v2
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          code:
+            - 'simple_accounting/**'
+
   deployment:
     name: "Deployment"
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
         python-version: [ '3.10' ]
+    needs: paths-filter
+    if: needs.paths-filter.outputs.output1 == 'true'
     steps:
       - uses: actions/checkout@v2
       - name: Setup python
