@@ -17,3 +17,5 @@ def signs(ledger_type: int) -> Signs:
         return Signs(debit=-1, credit=1)
     elif ledger_type == 4:  # EXPENSES
         return Signs(debit=1, credit=-1)
+    else:
+        raise RuntimeError(f"Unhandled ledger_type: {ledger_type}")

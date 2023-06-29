@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from accounting.models import *
+from simple_accounting.models import *
 
 
 class LedgerAdmin(admin.ModelAdmin):
