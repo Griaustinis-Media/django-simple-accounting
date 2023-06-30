@@ -102,8 +102,8 @@ class LedgerEntry(models.Model):
     ledger = models.ForeignKey(Ledger, on_delete=models.CASCADE, related_name="entries")
     transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE, related_name="entries")
 
-    debit = models.PositiveIntegerField(null=True, blank=True)
-    credit = models.PositiveIntegerField(null=True, blank=True)
+    debit = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    credit = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
