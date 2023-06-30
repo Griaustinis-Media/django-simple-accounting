@@ -19,3 +19,9 @@ INSTALLED_APPS = [
     "simple_accounting",
 ]
 ```
+
+## Usage
+It is based on idea of [Double-Entry Bookkeeping](https://en.wikipedia.org/wiki/Double-entry_bookkeeping). This means, every transaction should consists of minimum one Debit and one Credit Entry.
+Look at [examples](https://github.com/Griaustinis-Media/django-simple-accounting/blob/main/tests/test_transactions.py) as tests.
+
+`transaction.balanced` is a basic validation if Credit and Debit sides are equal in this transaction. If not balanced - something's wrong inside data.
