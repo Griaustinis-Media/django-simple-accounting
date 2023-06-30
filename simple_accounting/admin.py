@@ -1,6 +1,11 @@
 from django.contrib import admin
 
-from simple_accounting.models import *
+from simple_accounting.models import (
+    Ledger,
+    LedgerEntry,
+    Transaction,
+    TransactionEvidence
+)
 
 
 class LedgerAdmin(admin.ModelAdmin):
@@ -8,11 +13,24 @@ class LedgerAdmin(admin.ModelAdmin):
 
 
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ("transaction_type", "voids", "owner", "balanced", "posted_timestamp", "notes")
+    list_display = (
+        "transaction_type",
+        "voids",
+        "owner",
+        "balanced",
+        "posted_timestamp",
+        "notes"
+    )
 
 
 class LedgerEntryAdmin(admin.ModelAdmin):
-    list_display = ("ledger", "transaction", "debit", "credit", "created_at")
+    list_display = (
+        "ledger",
+        "transaction",
+        "debit",
+        "credit",
+        "created_at"
+    )
 
 
 admin.site.register(Ledger, LedgerAdmin)

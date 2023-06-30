@@ -63,7 +63,7 @@ class Transaction(models.Model):
     )
 
     posted_timestamp = models.DateTimeField(
-        help_text=_("Time the transaction was posted. Change this field to model retroactive ledger entries."),
+        help_text=_("Time the transaction was posted."),
         db_index=True
     )
 
@@ -90,23 +90,47 @@ class TransactionEvidence(models.Model):
         (OBJECT_TYPE_ORDER, _("Order"))
     ]
 
-    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE, related_name="evidences")
+    transaction = models.ForeignKey(
+        Transaction,
+        on_delete=models.CASCADE,
+        related_name="evidences"
+    )
     object_type = models.IntegerField(choices=OBJECT_TYPES)
     object_id = models.IntegerField()
 
     def __str__(self):
-        return f"Type: {self.object_type}, Object ID: {self.object_id} to Transaction: {self.transaction}"
+        return f"Type: {self.object_type}, "\
+            "Object ID: {self.object_id} to Transaction: {self.transaction}"
 
 
 class LedgerEntry(models.Model):
-    ledger = models.ForeignKey(Ledger, on_delete=models.CASCADE, related_name="entries")
-    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE, related_name="entries")
+    ledger = models.ForeignKey(
+        Ledger,
+        on_delete=models.CASCADE,
+        related_name="entries"
+    )
+    transaction = models.ForeignKey(
+        Transaction,
+        on_delete=models.CASCADE,
+        related_name="entries"
+    )
 
-    debit = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
-    credit = models.DecimalField(max_digits=15, decimal_places=2, null=True, blank=True)
+    debit = models.DecimalField(
+        max_digits=15,
+        decimal_places=2,
+        null=True,
+        blank=True
+    )
+    credit = models.DecimalField(
+        max_digits=15,
+        decimal_places=2,
+        null=True,
+        blank=True
+    )
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, blank=True, null=True)
 
     def __str__(self):
-        return f"Entry: DEBIT: {self.debit} CREDIT: {self.credit} Ledger: {self.ledger}"
+        return f"Entry: DEBIT: {self.debit}"\
+            "CREDIT: {self.credit} Ledger: {self.ledger}"
